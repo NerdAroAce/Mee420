@@ -18,6 +18,10 @@ class MyClient(discord.Client):
         self.tree = app_commands.CommandTree(self)
     async def setup_hook(self)
         await self.tree.sync()
+    async def on_message(self, message):
+        if message.content == "hewwo":
+           await message.channel.send("hewwo :3")
+        
 intents = discord.Intents.all()
 client = MyClient(intents=intents)
 client.run(TOKEN)
