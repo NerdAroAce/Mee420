@@ -38,12 +38,13 @@ async def furry(interaction: discord.Interaction):
 client.run(TOKEN)
 
 @client.tree.command(description="Kicks a user")
-@commands.has_permission(kick_members==True)
-async def kick(interaction: discord.Interaction):
-    await kick(discord.Member, reason=None)
-        if not reason==None:
-            interaction.response.send_message(content=f"{user} was kicked for {reason}")
-        else:
-            interaction.response.send_message(content=f"{user} was kicked. No reason was provided.")
+@commands.has_permissions(kick_members=True)
+async def kick(interaction: discord.Interaction, member: discord.Member, reason: str = None):
+    await member.kick(reason=reason)
+    if reason:
+        await interaction.response.send_message(content=f"{member} was kicked for {reason}")
+    else:
+        await interaction.response.send_message(content=f"{member} was kicked. No reason was provided.")
+
 client.run(TOKEN)
         
