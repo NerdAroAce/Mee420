@@ -7,16 +7,17 @@ from discord.ext import commands
 from discord import app_commands
 from discord.ext import tasks
 
-f = open("token.sensitive")
-TOKEN = f.readline()
-f.close()
+with open("token.sensitive") as f:
+    TOKEN = f.readline().strip()
 
 class MyClient(discord.Client):
     def __init__(self, *, intents: discord.Intents):
         super().__init__(intents=intents)
         self.tree = app_commands.CommandTree(self)
+        
     async def setup_hook(self):
         await self.tree.sync()
+
     async def on_message(self, message):
         if message.content == "add mee6":
            await message.channel.send("I'm better than that bastard.")
@@ -29,17 +30,14 @@ client = MyClient(intents=intents)
 @client.event
 async def on_ready():
     await client.tree.sync()
+    print(f'Logged in as {client.user}')
 
 @client.tree.command(description="Tells you how much of a furry you are :3")
-@app_commands.allowed_installs(guilds=True, users=True)
-@app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 async def furry(interaction: discord.Interaction):
     furrypercent = random.randint(0,100)
-    if interaction.user.name == "aroacenerd" or interaction.user.name == "tjc472" or interaction.user.name == "tjitalianprosciuttoidk." :
+    if interaction.user.name in ["aroacenerd", "tjc472", "tjitalianprosciuttoidk."]:
         furrypercent = 100
     await interaction.response.send_message(content=f"You are {str(furrypercent)}% a furry.")
-    
-client.run(TOKEN)
 
 @client.tree.command(description="Kicks a user")
 @commands.has_permissions(kick_members=True)
@@ -51,4 +49,3 @@ async def kick(interaction: discord.Interaction, member: discord.Member, reason:
         await interaction.response.send_message(content=f"{member} was kicked. No reason was provided.")
 
 client.run(TOKEN)
-        
