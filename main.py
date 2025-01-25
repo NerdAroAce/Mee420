@@ -48,4 +48,14 @@ async def kick(interaction: discord.Interaction, member: discord.Member, reason:
     else:
         await interaction.response.send_message(content=f"{member} was kicked. No reason was provided.")
 
+@client.tree.command(description="Bans a user")
+@commands.has_permissions(ban_members=True)
+async def kick(interaction: discord.Interaction, member: discord.Member, reason: str = None):
+    await member.ban(reason=reason)
+    if reason:
+        await interaction.response.send_message(content=f"{member} was banned for {reason}")
+    else:
+        await interaction.response.send_message(content=f"{member} was banned. No reason was provided.")
+
+
 client.run(TOKEN)
