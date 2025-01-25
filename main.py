@@ -11,10 +11,6 @@ f = open("token.sensitive")
 TOKEN = f.readline()
 f.close()
 
-@client.event
-async def on_ready():
-    await client.tree.sync()
-
 class MyClient(discord.Client):
     def __init__(self, *, intents: discord.Intents):
         super().__init__(intents=intents)
@@ -29,6 +25,10 @@ class MyClient(discord.Client):
 
 intents = discord.Intents.all()
 client = MyClient(intents=intents)
+
+@client.event
+async def on_ready():
+    await client.tree.sync()
 
 @client.tree.command(description="Tells you how much of a furry you are :3")
 @app_commands.allowed_installs(guilds=True, users=True)
