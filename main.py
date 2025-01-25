@@ -63,8 +63,8 @@ async def uban(interaction: discord.Interaction, user: discord.User, reason: str
     guild = interaction.guild
     await guild.unban(user, reason=reason)
     if reason:
-        await interaction.response.send_message(content=f"{member} was unbanned. Admin note: {reason}")
+        await interaction.response.send_message(content=f"{user} was unbanned. Admin note: {reason}")
     else:
-        await interaction.response.send_message(content=f"{member} was unbanned.")
+        await interaction.response.send_message(content=f"{user} was unbanned.")
         
 client.run(TOKEN)
