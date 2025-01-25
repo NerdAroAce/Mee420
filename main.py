@@ -20,7 +20,7 @@ class MyClient(discord.Client):
     async def on_message(self, message):
         if message.content == "add mee6":
            await message.channel.send("I'm better than that bastard.")
-        if message.content == "m!furry'
+        if message.content == "m!furry':
             await message.channel.send(f"You are {str(random.randint(0,100))}% a furry.")
 @client.tree.command(description="Tells you how much of a furry you are :3")
 @app_commands.allowed_installs(guilds=True, users=True)
