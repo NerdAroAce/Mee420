@@ -36,4 +36,14 @@ async def furry(interaction: discord.Interaction):
     await interaction.response.send_message(content=f"You are {str(furrypercent)}% a furry.")
     
 client.run(TOKEN)
+
+@client.tree.command(description="Kicks a user")
+@commands.has_permission(kick_members==True)
+async def kick(interaction: discord.Interaction):
+    await kick(user, *, reason=None):
+        if not reason==None:
+            interaction.response.send_message(content=f"{user} was kicked for {reason}")
+        else:
+            interaction.response.send_message(content=f"{user} was kicked. No reason was provided.")
+client.run(TOKEN)
         
