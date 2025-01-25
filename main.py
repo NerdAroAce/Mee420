@@ -70,7 +70,7 @@ client.run(TOKEN)
 
 @client.command()
 @commands.has_permissions(kick_members=True)
-async def kick(ctx, user: discord.Member, *, reason = None):\
+async def kick(ctx, user: discord.Member, *, reason = None):
     if not reason:
         await user.kick()
         await ctx.send(f"{user} has been kicked. No reason was provided.")
