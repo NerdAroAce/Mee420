@@ -57,8 +57,8 @@ async def ban(interaction: discord.Interaction, member: discord.Member, reason: 
     else:
         await interaction.response.send_message(content=f"{member} was banned. No reason was provided.")
 
-@client.tree.command(description="Unbans a user")
-@commands.has_permissions(administrator=True)
+@client.tree.command(name="uban", description="Unbans a user")
+@commands.has_permissions(ban_members=True)
 async def uban(interaction: discord.Interaction, user: discord.User, reason: str = None):
     guild = interaction.guild
     await guild.unban(user, reason=reason)
