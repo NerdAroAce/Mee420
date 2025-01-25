@@ -39,7 +39,7 @@ async def furry(interaction: discord.Interaction):
         furrypercent = 100
     await interaction.response.send_message(content=f"You are {str(furrypercent)}% a furry.")
 
-@client.tree.command(description="Kicks a user")
+@client.tree.command(description="Kicks a member")
 @commands.has_permissions(kick_members=True)
 async def kick(interaction: discord.Interaction, member: discord.Member, reason: str = None):
     await member.kick(reason=reason)
@@ -48,7 +48,7 @@ async def kick(interaction: discord.Interaction, member: discord.Member, reason:
     else:
         await interaction.response.send_message(content=f"{member} was kicked. No reason was provided.")
 
-@client.tree.command(description="Bans a user")
+@client.tree.command(description="Bans a member")
 @commands.has_permissions(ban_members=True)
 async def ban(interaction: discord.Interaction, member: discord.Member, reason: str = None):
     await member.ban(reason=reason)
@@ -57,5 +57,13 @@ async def ban(interaction: discord.Interaction, member: discord.Member, reason: 
     else:
         await interaction.response.send_message(content=f"{member} was banned. No reason was provided.")
 
-
+@client.tree.command(description="Unbans a user")
+@commands.has_permissions(administrator=True)
+async def uban(interaction: discord.Interaction, member: discord.Member, reason: str = None)
+    await member.unban
+    if reason:
+        await interaction.response.send_message(content=f"{member} was unbanned. Admin note: {reason}")
+    else:
+        await interaction.response.send_message(content=f"{member} was unbanned.")
+        
 client.run(TOKEN)
