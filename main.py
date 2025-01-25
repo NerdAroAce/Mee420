@@ -53,14 +53,15 @@ async def kick(interaction: discord.Interaction, member: discord.Member, reason:
 async def ban(interaction: discord.Interaction, member: discord.Member, reason: str = None):
     await member.ban(reason=reason)
     if reason:
-        await interaction.response.send_message(content=f"{member} was banned for {reason}")
+        await interaction.response.send_message(content=f"{member} was banned. Reason: {reason}")
     else:
         await interaction.response.send_message(content=f"{member} was banned. No reason was provided.")
 
 @client.tree.command(description="Unbans a user")
 @commands.has_permissions(administrator=True)
-async def uban(interaction: discord.Interaction, member: discord.Member, reason: str = None):
-    await member.unban(reason=reason)
+async def uban(interaction: discord.Interaction, user: discord.User, reason: str = None):
+    guild = interaction.guild
+    await guild.unban(user, reason=reason)
     if reason:
         await interaction.response.send_message(content=f"{member} was unbanned. Admin note: {reason}")
     else:
