@@ -11,6 +11,10 @@ f = open("token.sensitive")
 TOKEN = f.readline()
 f.close()
 
+@client.event
+async def on_ready():
+    await client.tree.sync()
+
 class MyClient(discord.Client):
     def __init__(self, *, intents: discord.Intents):
         super().__init__(intents=intents)
