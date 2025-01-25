@@ -29,7 +29,10 @@ client = MyClient(intents=intents)
 @client.tree.command(description="Tells you how much of a furry you are :3")
 @app_commands.allowed_installs(guilds=True, users=True)
 @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
-async def furry(interaction: discord.Interaction,):
-   await interaction.response.send_message(content=f"You are {str(random.randint(0,100))}% a furry.")   
+async def furry(interaction: discord.Interaction):
+    furrypercent = random.randint(0,100)
+    if interaction.user.name == "aroacenerd" or interaction.user.name == "tjc472":
+        furrypercent = 100
+    await interaction.response.send_message(content=f"You are {str(furrypercent)}% a furry.")
 
 client.run(TOKEN)
